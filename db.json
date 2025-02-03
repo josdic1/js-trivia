@@ -1,0 +1,79 @@
+{
+   "questions": [
+      {
+         "question": "What is the capital of France?",
+         "answer": "Paris",
+         "difficulty": "easy"
+      },
+      {
+         "question": "What gas do plants breathe in?",
+         "answer": "CO2",
+         "difficulty": "easy"
+      },
+      {
+         "question": "Who wrote '1984'?",
+         "answer": "George Orwell",
+         "difficulty": "medium"
+      },
+      {
+         "question": "What element has the symbol 'Au'?",
+         "answer": "Gold",
+         "difficulty": "medium"
+      },
+      {
+         "question": "Who painted the Mona Lisa?",
+         "answer": "Da Vinci",
+         "difficulty": "medium"
+      },
+      {
+         "question": "What’s the square root of 144?",
+         "answer": "12",
+         "difficulty": "medium"
+      },
+      {
+         "question": "What is the largest planet?",
+         "answer": "Jupiter",
+         "difficulty": "hard"
+      },
+      {
+         "question": "Who discovered penicillin?",
+         "answer": "Alexander Fleming",
+         "difficulty": "hard"
+      },
+      {
+         "question": "What is the speed of light in m/s?",
+         "answer": "299,792,458",
+         "difficulty": "hard"
+      },
+      {
+         "question": "What’s the chemical formula for table salt?",
+         "answer": "NaCl",
+         "difficulty": "hard"
+      },
+      {
+         "question": "What’s the hardest natural substance?",
+         "answer": "Diamond",
+         "difficulty": "hard"
+      },
+      {
+         "question": "What’s the last element in the periodic table?",
+         "answer": "Oganesson",
+         "difficulty": "impossible"
+      },
+      {
+         "question": "What year did the Byzantine Empire fall?",
+         "answer": "1453",
+         "difficulty": "impossible"
+      },
+      {
+         "question": "Who developed the Turing Test?",
+         "answer": "Alan Turing",
+         "difficulty": "impossible"
+      },
+      {
+         "question": "What is the Riemann Hypothesis?",
+         "answer": "An unsolved math problem",
+         "difficulty": "impossible"
+      }
+   ]
+}

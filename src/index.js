@@ -2,6 +2,7 @@ const init = () => {
   let questions = [];
   let formData = {};
 
+  const message = document.getElementById("message");
   const list = document.getElementById("list");
   const form = document.getElementById("form");
 
@@ -34,25 +35,20 @@ const init = () => {
       </table>
     `;
 
-    list.addEventListener('click', function (e) {
-      if (e.target.classList.contains("td-hover")) {
-        const { id } = e.target
-        const foundQuestion = questions.find(q => q.id === id)
-        document.getElementById(id).tex
-
-      } else {
-        console.log('no')
-      }
-
-    })
 
     list.innerHTML = listHtml;
 
-
-
-
-
   }
+
+  list.addEventListener('click', function (e) {
+    if (e.target.classList.contains("td-hover")) {
+      const { id } = e.target
+      const foundQuestion = questions.find(q => q.id === id)
+      document.getElementById('message').innerHTML = foundQuestion.answer
+    }
+
+  })
+
 
   function renderForm() {
     const formHtml = `

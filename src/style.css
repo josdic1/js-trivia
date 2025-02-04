@@ -25,10 +25,13 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
   min-width: 320px;
   min-height: 100vh;
 }
+
 
 h1 {
   font-size: 3.2em;
@@ -40,7 +43,39 @@ h1 {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center-align elements */
+  gap: 1rem; /* Add spacing between elements */
 }
+
+#message {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  min-height: 40px; /* Ensure it stays visible even when empty */
+  width: 100%;
+  text-align: center;
+}
+
+#form {
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px; /* Prevent it from being too wide */
+}
+
+#list {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+}
+
 
 .logo {
   height: 6em;

@@ -23,7 +23,7 @@ const init = () => {
     const questionList = listData.map(question => (
       `<tr>
         <td>${question.id}</td>
-           <td class='td-hover'>${question.question}</td>
+           <td class='td-hover' id="${question.id}">${question.question}</td>
               <td>${question.difficulty}</td>
                  <td>
                  <button type='button' id="${question.id}" name="edit">Edit</button>
@@ -54,16 +54,16 @@ const init = () => {
 
     list.innerHTML = listHtml;
 
+    list.addEventListener('click', function (e) {
+      if (e.target.classList.contains("td-hover")) {
+        const { id } = e.target
+        const questionMatch = questions.find(q => q.id === id)
+        message.textContent = questionMatch.answer
+      }
+    })
+
   }
 
-  list.addEventListener('click', function (e) {
-    if (e.target.classList.contains("td-hover")) {
-      const { id } = e.target
-      const foundQuestion = questions.find(q => q.id === id)
-      document.getElementById('message').innerHTML = foundQuestion.answer
-    }
-
-  })
 
 
   function renderFilter() {
@@ -97,36 +97,33 @@ const init = () => {
     selectFilter: 'all'
   }
 
+  let filteredList = []
   function updateFilter(e) {
     const { id, value } = e.target
     filterValue = {
       ...filterValue,
       [id]: value
     }
-    if (filterValue.textFilter === "" &&
-      filterValue.selectFilter === "all"
-    ) {
-      renderList(questions)
-    } else {
-      filterList(filterValue)
-    }
-  }
-
-  let filteredList;
-  function filterList(filterObj) {
     filteredList = questions.filter(q => (
-      q.question.toLowerCase().includes(filterObj.textFilter) &&
-      q.difficulty === filterObj.selectFilter
+      q.question.toLowerCase().includes(filterValue.textFilter.toLowerCase()) &&
+      q.difficulty === filterValue.selectFilter && filterValue.selectFilter !== 'all'
     ))
     renderList(filteredList)
   }
 
 
+
   function clearFilter() {
     document.getElementById('textFilter').value = ''
     document.getElementById('selectFilter').value = 'all'
+
+    filterValue = {
+      textFilter: '',
+      selectFilter: 'all'
+    }
+
     filteredList = questions
-    renderList(filteredList)
+    renderList(questions)
   }
 
 

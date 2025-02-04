@@ -10,8 +10,9 @@ const init = () => {
   }
 
   const message = document.getElementById("message");
-  const list = document.getElementById("list");
   const form = document.getElementById("form");
+  const filter = document.getElementById("filter");
+  const list = document.getElementById("list");
 
   fetchQs();
 
@@ -22,10 +23,10 @@ const init = () => {
         <td class='td-hover' id="${q.id}">${q.question}</td>
           <td>${q.difficulty}</td>
              <td>
-          <button type="button" name="edit" id="${q.id}"> O </button>
+          <button type="button" name="edit" id="${q.id}"> Edit </button>
         </td>
         <td>
-          <button type="button" name="del" id="${q.id}"> X </button>
+          <button type="button" name="del" id="${q.id}"> Del </button>
         </td>
       </tr>
     `).join("");
@@ -61,6 +62,50 @@ const init = () => {
 
   })
 
+  function renderFilter() {
+    const filterHtml =
+      `<p>
+        <label>Filter by: </label>
+        <input type='text' id="textFilter" name='textFilter'  class="filter-input" placeholder='Text match...'>
+            <select id='selectFilter' name='selectFilter' class="filter-input" >
+            <option value = 'all' selected disabled>Difficulty...</option>
+             <option value = 'easy'>Easy</option>
+             <option value = 'medium'>Medium</option>
+             <option value = 'hard'>Hard</option>
+             <option value = 'impossible'>Impossible</option>
+           </select>
+           <button type='button' id='clearFilter'> Reset </button>
+        </p>`
+
+
+    filter.innerHTML = filterHtml
+
+    document.getElementById('textFilter').addEventListener('input', updateFilter)
+
+    document.getElementById('selectFilter').addEventListener('change', updateFilter)
+
+    document.getElementById('clearFilter').addEventListener('click', clearFilter)
+
+  }
+
+  let filterValue = {
+    textFilter: '',
+    selectFilter: 'all'
+  }
+
+  function updateFilter(e) {
+    const { id, value } = e.target
+    filterValue = {
+      ...filterValue,
+      [id]: value
+    }
+  }
+
+  function clearFilter() {
+    document.getElementById('textFilter').value = ''
+    document.getElementById('selectFilter').value = 'all'
+  }
+
 
   function renderForm() {
     const formHtml = `
@@ -95,6 +140,8 @@ const init = () => {
     } else {
       if (e.target.name === 'edit') {
         inEditMode = true
+        document.getElementById('message')
+        message.textContent = "⚠️ Edit Mode"
         const qId = e.target.id;
         const obj = questions.find(q => q.id === qId)
         selectedQuestion = obj
@@ -130,6 +177,7 @@ const init = () => {
       await updateQs(updatedQuestion);
       selectedQuestion = updatedQuestion
     }
+    clearForm()
   }
 
 
@@ -139,6 +187,7 @@ const init = () => {
     document.getElementById("answer").value = ''
     document.getElementById("difficulty").value = ''
     document.getElementById("message").textContent = ''
+    inEditMode = false
   }
 
 
@@ -152,6 +201,7 @@ const init = () => {
       questions = data
       renderList();
       renderForm();
+      renderFilter();
     } catch (error) {
       console.error(error);
     }

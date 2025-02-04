@@ -25,9 +25,9 @@
       "id": "7cb7"
     },
     {
-      "question": "What’s the chemical formula for table salt?",
-      "answer": "NaCl",
-      "difficulty": "hard",
+      "question": "What color is the sun?",
+      "answer": "Reddish",
+      "difficulty": "easy",
       "id": "511f"
     },
     {
@@ -41,6 +41,12 @@
       "answer": "Alan Turing",
       "difficulty": "medium",
       "id": "97d0"
+    },
+    {
+      "id": "24d6",
+      "question": "Who is the best?",
+      "answer": "Josh",
+      "difficulty": "easy"
     }
   ]
 }

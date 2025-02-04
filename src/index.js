@@ -16,20 +16,23 @@ const init = () => {
 
   fetchQs();
 
-  function renderList() {
-    const questionList = questions.map(q => `
-      <tr id="row-${q.id}">
-        <td>${q.id}</td>
-        <td class='td-hover' id="${q.id}">${q.question}</td>
-          <td>${q.difficulty}</td>
-             <td>
-          <button type="button" name="edit" id="${q.id}"> Edit </button>
-        </td>
-        <td>
-          <button type="button" name="del" id="${q.id}"> Del </button>
-        </td>
-      </tr>
-    `).join("");
+
+
+
+  function renderList(listData) {
+    const questionList = listData.map(question => (
+      `<tr>
+        <td>${question.id}</td>
+           <td class='td-hover'>${question.question}</td>
+              <td>${question.difficulty}</td>
+                 <td>
+                 <button type='button' id="${question.id}" name="edit">Edit</button>
+                   <td>
+                 <button type='button' id="${question.id}" name="del">Del</button>
+                 </td>
+      </tr>`
+    ))
+
 
     const listHtml = `
       <table>
@@ -43,7 +46,7 @@ const init = () => {
           </tr>
         </thead>
         <tbody>
-          ${questionList}
+          ${questionList.join('')}
         </tbody>
       </table>
     `;
@@ -61,6 +64,7 @@ const init = () => {
     }
 
   })
+
 
   function renderFilter() {
     const filterHtml =
@@ -99,11 +103,30 @@ const init = () => {
       ...filterValue,
       [id]: value
     }
+    if (filterValue.textFilter === "" &&
+      filterValue.selectFilter === "all"
+    ) {
+      renderList(questions)
+    } else {
+      filterList(filterValue)
+    }
   }
+
+  let filteredList;
+  function filterList(filterObj) {
+    filteredList = questions.filter(q => (
+      q.question.toLowerCase().includes(filterObj.textFilter) &&
+      q.difficulty === filterObj.selectFilter
+    ))
+    renderList(filteredList)
+  }
+
 
   function clearFilter() {
     document.getElementById('textFilter').value = ''
     document.getElementById('selectFilter').value = 'all'
+    filteredList = questions
+    renderList(filteredList)
   }
 
 
@@ -180,8 +203,6 @@ const init = () => {
     clearForm()
   }
 
-
-
   function clearForm() {
     document.getElementById("question").value = ''
     document.getElementById("answer").value = ''
@@ -199,7 +220,7 @@ const init = () => {
       }
       const data = await r.json();
       questions = data
-      renderList();
+      renderList(data);
       renderForm();
       renderFilter();
     } catch (error) {

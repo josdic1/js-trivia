@@ -13,40 +13,10 @@
       "id": "a58b"
     },
     {
-      "question": "Who wrote '1984'?",
-      "answer": "George Orwell",
-      "difficulty": "medium",
-      "id": "0aa0"
-    },
-    {
       "question": "What element has the symbol 'Au'?",
       "answer": "Gold",
       "difficulty": "medium",
       "id": "c025"
-    },
-    {
-      "question": "Who painted the Mona Lisa?",
-      "answer": "Da Vinci",
-      "difficulty": "medium",
-      "id": "479a"
-    },
-    {
-      "question": "What’s the square root of 144?",
-      "answer": "12",
-      "difficulty": "medium",
-      "id": "ee6e"
-    },
-    {
-      "question": "What is the largest planet?",
-      "answer": "Jupiter",
-      "difficulty": "hard",
-      "id": "657a"
-    },
-    {
-      "question": "Who discovered penicillin?",
-      "answer": "Alexander Fleming",
-      "difficulty": "hard",
-      "id": "3332"
     },
     {
       "question": "What is the speed of light in m/s?",
@@ -61,22 +31,10 @@
       "id": "511f"
     },
     {
-      "question": "What’s the hardest natural substance?",
-      "answer": "Diamond",
-      "difficulty": "hard",
-      "id": "5294"
-    },
-    {
       "question": "What’s the last element in the periodic table?",
       "answer": "Oganesson",
       "difficulty": "impossible",
       "id": "0140"
-    },
-    {
-      "question": "What year did the Byzantine Empire fall?",
-      "answer": "1453",
-      "difficulty": "impossible",
-      "id": "4237"
     },
     {
       "question": "Who developed the Turing Test?",
@@ -85,10 +43,14 @@
       "id": "97d0"
     },
     {
-      "question": "What is the Riemann Hypothesis?",
-      "answer": "An unsolved math problem",
-      "difficulty": "impossible",
-      "id": "b87f"
+      "id": "2527",
+      "question": "What color is the sun?",
+      "answer": "Red"
+    },
+    {
+      "id": "7afc",
+      "question": "Who was the moon",
+      "answer": "MArky"
     }
   ]
 }

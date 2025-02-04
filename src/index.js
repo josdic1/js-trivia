@@ -11,7 +11,8 @@ const init = () => {
     const questionList = questions.map(q => `
       <tr id="row-${q.id}">
         <td>${q.id}</td>
-        <td>${q.question}</td>
+        <td class='td-hover' id="${q.id}">${q.question}</td>
+          <td>${q.difficulty}</td>
         <td>
           <button type="button" name="del" id="${q.id}"> X </button>
         </td>
@@ -33,12 +34,37 @@ const init = () => {
       </table>
     `;
 
+    list.addEventListener('click', function (e) {
+      if (e.target.classList.contains("td-hover")) {
+        const { id } = e.target
+        const foundQuestion = questions.find(q => q.id === id)
+        document.getElementById(id).tex
+
+      } else {
+        console.log('no')
+      }
+
+    })
+
     list.innerHTML = listHtml;
+
+
+
+
+
   }
 
   function renderForm() {
     const formHtml = `
       <input type='text' id='question' name='question' placeholder='Question goes here...' />
+           <input type='text' id='answer' name='answer' placeholder='Answer goes here...' /><br>
+           <select id='difficulty' name='difficulty'>
+            <option value = '' selected disabled>Choose one...</option>
+             <option value = 'easy'>Easy</option>
+             <option value = 'medium'>Medium</option>
+             <option value = 'hard'>Hard</option>
+             <option value = 'impossible'>Impossible</option>
+           </select>
       <button type='submit' id='submit' name='submit'> Submit </button>
     `;
     form.innerHTML = formHtml;
@@ -46,11 +72,20 @@ const init = () => {
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
       const qVal = document.getElementById("question").value;
-
-      formData = { question: qVal };
+      const aVal = document.getElementById("answer").value;
+      const dVal = document.getElementById("difficulty").value;
+      formData = {
+        ...formData,
+        question: qVal,
+        answer: aVal,
+        difficulty: dVal
+      };
       await addQs(formData);
     });
+
   }
+
+
 
   async function fetchQs() {
     try {
@@ -58,7 +93,8 @@ const init = () => {
       if (!r.ok) {
         throw new Error("Bad response from server");
       }
-      questions = await r.json();
+      const data = await r.json();
+      questions = data
       renderList();
       renderForm();
     } catch (error) {

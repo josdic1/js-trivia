@@ -20,18 +20,16 @@ const init = () => {
 
 
   function renderList(listData) {
-    const questionList = listData.map(question => (
-      `<tr>
+    const questionList = listData.map(question => `
+      <tr>
         <td>${question.id}</td>
-           <td class='td-hover' id="${question.id}">${question.question}</td>
-              <td>${question.difficulty}</td>
-                 <td>
-                 <button type='button' id="${question.id}" name="edit">Edit</button>
-                   <td>
-                 <button type='button' id="${question.id}" name="del">Del</button>
-                 </td>
-      </tr>`
-    ))
+        <td class='td-hover' id="${question.id}">${question.question}</td>
+        <td>${question.difficulty}</td>
+        <td><button type='button' id="${question.id}" name="edit">Edit</button></td>
+        <td><button type='button' id="${question.id}" name="del">Del</button></td>
+      </tr>
+    `).join("");
+
 
 
     const listHtml = `
@@ -46,7 +44,7 @@ const init = () => {
           </tr>
         </thead>
         <tbody>
-          ${questionList.join('')}
+          ${questionList}
         </tbody>
       </table>
     `;
@@ -99,17 +97,20 @@ const init = () => {
 
   let filteredList = []
   function updateFilter(e) {
-    const { id, value } = e.target
+    const { id, value } = e.target;
     filterValue = {
       ...filterValue,
       [id]: value
-    }
-    filteredList = questions.filter(q => (
+    };
+
+    filteredList = questions.filter(q =>
       q.question.toLowerCase().includes(filterValue.textFilter.toLowerCase()) &&
-      q.difficulty === filterValue.selectFilter && filterValue.selectFilter !== 'all'
-    ))
-    renderList(filteredList)
+      (filterValue.selectFilter === "all" || q.difficulty === filterValue.selectFilter)
+    );
+
+    renderList(filteredList);
   }
+
 
 
 
@@ -122,7 +123,7 @@ const init = () => {
       selectFilter: 'all'
     }
 
-    filteredList = questions
+    filteredList = [...questions]
     renderList(questions)
   }
 
@@ -154,23 +155,22 @@ const init = () => {
   }
 
   list.addEventListener("click", function (e) {
+    const qId = e.target.id;
+
     if (e.target.name === 'del') {
-      const qId = e.target.id;
       deleteQs(qId);
-    } else {
-      if (e.target.name === 'edit') {
-        inEditMode = true
-        document.getElementById('message')
-        message.textContent = "⚠️ Edit Mode"
-        const qId = e.target.id;
-        const obj = questions.find(q => q.id === qId)
-        selectedQuestion = obj
-        document.getElementById("question").value = obj.question
-        document.getElementById("answer").value = obj.answer
-        document.getElementById("difficulty").value = obj.difficulty
-      }
+    } else if (e.target.name === 'edit') {
+      inEditMode = true;
+      message.textContent = "⚠️ Edit Mode";
+      const obj = questions.find(q => q.id === qId);
+      selectedQuestion = obj;
+
+      document.getElementById("question").value = obj.question;
+      document.getElementById("answer").value = obj.answer;
+      document.getElementById("difficulty").value = obj.difficulty;
     }
   });
+
 
   async function handleSubmitClick(e) {
     e.preventDefault();
@@ -227,7 +227,7 @@ const init = () => {
 
   async function deleteQs(qId) {
     try {
-      console.log("Trying to delete ID:", qId);
+      // console.log("Trying to delete ID:", qId);
 
       const r = await fetch(`http://localhost:3000/questions/${qId}`, {
         method: "DELETE",
@@ -247,7 +247,7 @@ const init = () => {
   async function updateQs(question) {
     const qId = question.id
     try {
-      console.log("Trying to update ID:", qId);
+      // console.log("Trying to update ID:", qId);
       const r = await fetch(`http://localhost:3000/questions/${qId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },

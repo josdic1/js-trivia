@@ -25,12 +25,6 @@
       "id": "7cb7"
     },
     {
-      "question": "What color is the sun?",
-      "answer": "Reddish",
-      "difficulty": "easy",
-      "id": "511f"
-    },
-    {
       "question": "What’s the last element in the periodic table?",
       "answer": "Oganesson",
       "difficulty": "impossible",
@@ -41,18 +35,6 @@
       "answer": "Alan Turing",
       "difficulty": "medium",
       "id": "97d0"
-    },
-    {
-      "id": "24d6",
-      "question": "Who is the best?",
-      "answer": "Josh",
-      "difficulty": "easy"
-    },
-    {
-      "id": "fe10",
-      "question": "Am I done?",
-      "answer": "I think so",
-      "difficulty": "easy"
     }
   ]
 }
